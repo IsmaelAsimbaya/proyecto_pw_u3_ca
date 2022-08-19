@@ -14,25 +14,21 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
 
 	@Override
 	public void crear(Empleado empleado) {
-
 		this.empleadoRepository.crear(empleado);
 	}
 
 	@Override
 	public void actualizar(Empleado empleado) {
-
 		this.empleadoRepository.actualizar(empleado);
 	}
 
 	@Override
 	public void eliminar(Integer id) {
-
 		this.empleadoRepository.eliminar(id);
 	}
 
 	@Override
 	public Empleado buscarPorId(Integer id) {
-
 		return this.empleadoRepository.buscar(id);
 	}
 
