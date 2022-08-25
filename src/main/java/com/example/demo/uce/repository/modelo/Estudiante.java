@@ -15,14 +15,17 @@ public class Estudiante {
 	@Column(name = "estd_id")
 	private Integer id;
 	
-	@Column(name = "empl_nombre")
+	@Column(name = "estd_nombre")
 	private String nombre;
 
-	@Column(name = "empl_apellido")
+	@Column(name = "estd_apellido")
 	private String apellido;
 
-	@Column(name = "empl_fecha_nacimiento")
+	@Column(name = "estd_fecha_nacimiento")
 	private LocalDateTime fechaNacimiento;
+	
+	@Column(name = "estd_semestre")
+	private Integer semestre;
 
 	public Integer getId() {
 		return id;
@@ -54,6 +57,14 @@ public class Estudiante {
 
 	public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public Integer getSemestre() {
+		return semestre;
+	}
+
+	public void setSemestre(Integer semestre) {
+		this.semestre = semestre;
 	}
 	
 	
