@@ -1,53 +1,35 @@
-package com.example.demo.uce.repository.modelo;
+package com.example.demo.uce.service.to;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import org.springframework.hateoas.RepresentationModel;
 
-@Entity
-@Table(name = "empleado")
-public class Empleado {
+import com.example.demo.uce.repository.modelo.Hijo;
 
-	@Id
-	@Column(name = "empl_id")
+public class EmpleadoTo extends RepresentationModel<EmpleadoTo> implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5111687043345548133L;
+
 	private Integer id;
 
-	@Column(name = "empl_nombre")
 	private String nombre;
 
-	@Column(name = "empl_apellido")
 	private String apellido;
 
-	@Column(name = "empl_fecha_nacimiento")
 	private LocalDateTime fechaNacimiento;
 
-	@Column(name = "empl_salario")
 	private BigDecimal salario;
 	
-	@OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER)
 	private List<Hijo> hijos;
 
-	// SET Y GET
-
-	
-	
 	public Integer getId() {
 		return id;
-	}
-
-	public List<Hijo> getHijos() {
-		return hijos;
-	}
-
-	public void setHijos(List<Hijo> hijos) {
-		this.hijos = hijos;
 	}
 
 	public void setId(Integer id) {
@@ -86,4 +68,14 @@ public class Empleado {
 		this.salario = salario;
 	}
 
+	public List<Hijo> getHijos() {
+		return hijos;
+	}
+
+	public void setHijos(List<Hijo> hijos) {
+		this.hijos = hijos;
+	}
+	
+	
+	
 }
