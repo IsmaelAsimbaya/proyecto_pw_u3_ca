@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,16 +24,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.uce.repository.modelo.Empleado;
 import com.example.demo.uce.service.IEmpleadoService;
+import com.example.demo.uce.service.IHijoService;
 import com.example.demo.uce.service.to.EmpleadoTo;
 import com.example.demo.uce.service.to.HijoTo;
 
 @RestController
 @RequestMapping("/empleados")
+@CrossOrigin("http://localhost:8080/")
 public class EmpleadoRestFulController {
 
 	@Autowired
 	private IEmpleadoService empleadoService;
 
+	@Autowired
+	private IHijoService hijoService;
+	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_XML_VALUE )
 	public String crear(@RequestBody Empleado empleado) {
 		String mensaje = "Empleado insertado correctamente";
@@ -52,7 +58,7 @@ public class EmpleadoRestFulController {
 		return "Empleado Actualizado";
 	}
 
-	@GetMapping(path = "/{idEmpleado}", produces = MediaType.APPLICATION_XML_VALUE)
+	@GetMapping(path = "/{idEmpleado}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Empleado> buscarEmpleado(@PathVariable("idEmpleado") Integer id) {
 		Empleado empl = this.empleadoService.buscarPorId(id);
 		return ResponseEntity.ok(empl);
@@ -89,7 +95,7 @@ public class EmpleadoRestFulController {
 		return this.empleadoService.buscarPorSalario(salario);
 	}
 
-	@GetMapping
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<EmpleadoTo> buscarTodos() {
 		List<EmpleadoTo> lista = this.empleadoService.buscarTodos();
 		for(EmpleadoTo empl: lista) {
@@ -101,10 +107,8 @@ public class EmpleadoRestFulController {
 	
 	@GetMapping(path = "/{idEmpleado}/hijos")
 	public List<HijoTo> buscarHijos(@PathVariable("idEmpleado") Integer idEmpleado){
-		
-		return null;
+		return this.hijoService.buscarHijosporId(idEmpleado);
 	}
-	
 	
 	
 	
